@@ -1,0 +1,132 @@
+[
+  {
+    "blackouts": [],
+    "code": "home-delivery",
+    "enabled": true,
+    "holidays": [
+      {
+        "date": "01-01",
+        "name": "New Year's Day"
+      },
+      {
+        "date": "12-25",
+        "name": "Christmas Day"
+      },
+      {
+        "date": "12-26",
+        "name": "Boxing Day"
+      }
+    ],
+    "leadTimeMinutes": 120,
+    "maxDaysAhead": 14,
+    "name": "Home delivery",
+    "nextDayCutoff": "18:00",
+    "overrides": [],
+    "priority": 10,
+    "required": true,
+    "sameDayCutoff": "10:00",
+    "sameDayEnabled": true,
+    "shippingMethods": [
+      "flatrate_flatrate"
+    ],
+    "slots": [
+      {
+        "capacity": 20,
+        "code": "morning",
+        "end": "12:00",
+        "fee": 0,
+        "label": "Morning",
+        "start": "08:00"
+      },
+      {
+        "capacity": 20,
+        "code": "afternoon",
+        "end": "17:00",
+        "fee": 0,
+        "label": "Afternoon",
+        "start": "12:00"
+      },
+      {
+        "capacity": 10,
+        "code": "evening",
+        "end": "21:00",
+        "fee": 4.95,
+        "label": "Evening",
+        "start": "17:00"
+      },
+      {
+        "capacity": 8,
+        "code": "saturday",
+        "days": [
+          6
+        ],
+        "end": "13:00",
+        "fee": 6.95,
+        "label": "Saturday morning",
+        "start": "09:00"
+      }
+    ],
+    "storeViews": [],
+    "timezone": "Europe/London",
+    "type": "delivery",
+    "workingDays": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "blackouts": [],
+    "code": "store-pickup",
+    "enabled": true,
+    "holidays": [
+      {
+        "date": "12-25",
+        "name": "Christmas Day"
+      }
+    ],
+    "leadTimeMinutes": 60,
+    "maxDaysAhead": 7,
+    "name": "Click and collect",
+    "nextDayCutoff": "",
+    "overrides": [],
+    "priority": 20,
+    "required": true,
+    "sameDayCutoff": "15:00",
+    "sameDayEnabled": true,
+    "shippingMethods": [
+      "instore_pickup"
+    ],
+    "slots": [
+      {
+        "capacity": 15,
+        "code": "pickup-am",
+        "end": "13:00",
+        "fee": 0,
+        "label": "Morning pickup",
+        "start": "10:00"
+      },
+      {
+        "capacity": 15,
+        "code": "pickup-pm",
+        "end": "18:00",
+        "fee": 0,
+        "label": "Afternoon pickup",
+        "start": "13:00"
+      }
+    ],
+    "storeViews": [],
+    "timezone": "America/New_York",
+    "type": "pickup",
+    "workingDays": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+]

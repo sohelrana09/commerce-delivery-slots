@@ -1,0 +1,12 @@
+extensions:
+  # Business configuration shown in App Management. Do not remove.
+  - extensionPointId: commerce/configuration/1
+  # Required for App Management: webhooks, events and installation steps. Do not remove.
+  - extensionPointId: commerce/extensibility/1
+  # The Delivery Slots Admin page. Do not remove.
+  - extensionPointId: commerce/backend-ui/2
+apis:
+  - code: AdobeIOManagementAPISDK
+  - code: CloudIntegrationSDK
+  - code: CommerceEventingAPI
+  - code: AppBuilderDataServicesSDK

@@ -1,0 +1,38 @@
+[
+  {
+    "default": true,
+    "label": "Offer delivery date and time slots at checkout",
+    "name": "slotsEnabled",
+    "type": "boolean"
+  },
+  {
+    "default": "20",
+    "label": "Minutes a chosen slot is held for the shopper before checkout (5 to 240)",
+    "name": "holdMinutes",
+    "type": "text"
+  },
+  {
+    "default": "30",
+    "label": "Seconds browsers and the CDN may cache slot availability (0 to 3600)",
+    "name": "cacheSeconds",
+    "type": "text"
+  },
+  {
+    "default": false,
+    "label": "Show shoppers how many places are left in each slot",
+    "name": "showRemaining",
+    "type": "boolean"
+  },
+  {
+    "default": true,
+    "label": "Allow orders when the slot check fails unexpectedly (a full slot still blocks the order)",
+    "name": "failOpen",
+    "type": "boolean"
+  },
+  {
+    "default": true,
+    "label": "Add the chosen slot to the order as an internal comment",
+    "name": "orderComment",
+    "type": "boolean"
+  }
+]

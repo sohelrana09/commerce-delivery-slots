@@ -1,0 +1,194 @@
+/* Delivery Slots storefront kit. Restyle with the custom properties on .delivery-slots. */
+
+.delivery-slots {
+  --delivery-slots-accent: var(--color-brand-500, #1f1f1f);
+  --delivery-slots-border: var(--color-neutral-400, #d6d6d6);
+  --delivery-slots-muted: var(--color-neutral-700, #5c5c5c);
+  --delivery-slots-surface: var(--color-neutral-50, #fff);
+  --delivery-slots-disabled: var(--color-neutral-200, #f2f2f2);
+  --delivery-slots-error: var(--color-alert-800, #b30000);
+  --delivery-slots-radius: var(--shape-border-radius-2, 8px);
+  --delivery-slots-gap: var(--spacing-small, 8px);
+
+  display: grid;
+  gap: var(--spacing-medium, 16px);
+  margin-block: var(--spacing-medium, 16px);
+}
+
+.delivery-slots[hidden] {
+  display: none;
+}
+
+.delivery-slots__title {
+  margin: 0;
+  font: var(--type-headline-2-default-font, 600 1.25rem/1.4 sans-serif);
+}
+
+.delivery-slots__hint,
+.delivery-slots__status,
+.delivery-slots__empty {
+  margin: 0;
+  color: var(--delivery-slots-muted);
+}
+
+.delivery-slots__status:empty {
+  display: none;
+}
+
+.delivery-slots__error {
+  margin: 0;
+  color: var(--delivery-slots-error);
+  font-weight: 600;
+}
+
+.delivery-slots__error[hidden] {
+  display: none;
+}
+
+.delivery-slots__body {
+  display: grid;
+  gap: var(--spacing-medium, 16px);
+}
+
+.delivery-slots__dates,
+.delivery-slots__slots {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.delivery-slots__legend {
+  margin-bottom: var(--delivery-slots-gap);
+  padding: 0;
+  font-weight: 600;
+}
+
+.delivery-slots__date-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: var(--delivery-slots-gap);
+}
+
+.delivery-slots__slot-list {
+  display: grid;
+  gap: var(--delivery-slots-gap);
+}
+
+/* Each option is a label wrapping a real radio input, so the whole card is clickable. */
+.delivery-slots__date,
+.delivery-slots__slot {
+  position: relative;
+  border: 1px solid var(--delivery-slots-border);
+  border-radius: var(--delivery-slots-radius);
+  background: var(--delivery-slots-surface);
+  cursor: pointer;
+}
+
+.delivery-slots__date {
+  display: grid;
+  justify-items: center;
+  padding: 8px 4px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.delivery-slots__slot {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 12px;
+}
+
+/* The radio stays in the accessibility tree and keyboard order, but the card shows its state. */
+.delivery-slots__date input,
+.delivery-slots__slot input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.delivery-slots__date-weekday,
+.delivery-slots__date-month,
+.delivery-slots__date-note {
+  font-size: 0.8125rem;
+  color: var(--delivery-slots-muted);
+}
+
+.delivery-slots__date-day {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.delivery-slots__slot-time {
+  font-weight: 600;
+}
+
+.delivery-slots__slot-note {
+  font-size: 0.875rem;
+  color: var(--delivery-slots-muted);
+  text-align: end;
+}
+
+.delivery-slots__date:has(input:checked),
+.delivery-slots__slot:has(input:checked) {
+  border-color: var(--delivery-slots-accent);
+  box-shadow: inset 0 0 0 1px var(--delivery-slots-accent);
+}
+
+.delivery-slots__date:has(input:focus-visible),
+.delivery-slots__slot:has(input:focus-visible) {
+  outline: 2px solid var(--delivery-slots-accent);
+  outline-offset: 2px;
+}
+
+.delivery-slots__date--unavailable,
+.delivery-slots__slot--unavailable {
+  background: var(--delivery-slots-disabled);
+  cursor: not-allowed;
+}
+
+.delivery-slots__date--unavailable .delivery-slots__date-day,
+.delivery-slots__slot--unavailable .delivery-slots__slot-time {
+  color: var(--delivery-slots-muted);
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+.delivery-slots__more,
+.delivery-slots__retry {
+  justify-self: start;
+  margin-top: var(--delivery-slots-gap);
+  padding: 8px 12px;
+  border: 1px solid var(--delivery-slots-border);
+  border-radius: var(--delivery-slots-radius);
+  background: var(--delivery-slots-surface);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.delivery-slots__more:focus-visible,
+.delivery-slots__retry:focus-visible {
+  outline: 2px solid var(--delivery-slots-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .delivery-slots__date,
+  .delivery-slots__slot {
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+}
+
+@media (forced-colors: active) {
+  .delivery-slots__date:has(input:checked),
+  .delivery-slots__slot:has(input:checked) {
+    outline: 3px solid Highlight;
+  }
+}

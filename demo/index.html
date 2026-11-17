@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delivery Slots demo</title>
+  <link rel="stylesheet" href="/storefront/styles/delivery-slots.css">
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; }
+    body { margin: 0; padding: 24px 16px; background: #fafafa; color: #1f1f1f; }
+    main { max-width: 720px; margin: 0 auto; display: grid; gap: 24px; }
+    h1 { margin: 0 0 4px; font-size: 24px; }
+    p { margin: 0; }
+    .intro { color: #555; }
+    .panel { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 16px; }
+    fieldset.methods { border: 0; margin: 0; padding: 0; display: grid; gap: 8px; }
+    fieldset.methods legend { font-weight: 600; margin-bottom: 8px; }
+    .methods label { display: flex; gap: 8px; align-items: center; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    button.place { padding: 12px 20px; border: 0; border-radius: 8px; background: #1f1f1f; color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+    button.place:focus-visible { outline: 2px solid #1f1f1f; outline-offset: 2px; }
+    button.reset { padding: 8px 12px; border: 1px solid #d6d6d6; border-radius: 8px; background: #fff; font: inherit; cursor: pointer; }
+    pre { margin: 0; white-space: pre-wrap; font-size: 13px; background: #f4f4f4; padding: 12px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Delivery Slots demo</h1>
+      <p class="intro">A mock checkout with the storefront kit. Availability and holds come from an in-browser backend that runs the same engine as the app's actions, with the example profiles switched on. Bookings are kept in this tab only.</p>
+    </header>
+    <section class="panel">
+      <fieldset class="methods">
+        <legend>Shipping method</legend>
+        <label><input type="radio" name="method" value="flatrate_flatrate" checked> Flat rate (home delivery, London calendar)</label>
+        <label><input type="radio" name="method" value="instore_pickup"> Store pickup (New York calendar, optional)</label>
+        <label><input type="radio" name="method" value="ups_GND"> UPS Ground (no slots)</label>
+      </fieldset>
+    </section>
+    <section class="panel" id="delivery-slots"></section>
+    <section class="panel actions">
+      <button class="place" type="button" id="place">Place order</button>
+      <button class="reset" type="button" id="fill">Fill the next slot (other shoppers)</button>
+    </section>
+    <section class="panel">
+      <p><strong>Order log</strong></p>
+      <pre id="log" aria-live="polite">Nothing yet.</pre>
+    </section>
+  </main>
+  <script type="module" src="/demo/demo.js"></script>
+</body>
+</html>

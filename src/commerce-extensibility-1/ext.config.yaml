@@ -1,0 +1,167 @@
+# The [pre-app-build] hooks are auto-generated. Do not remove or manually edit.
+hooks:
+  pre-app-build: EXTENSION=extensibility/1 npx aio-commerce-lib-app hooks pre-app-build
+  post-app-deploy: EXTENSION=extensibility/1 npx aio-commerce-lib-app hooks post-app-deploy
+
+operations:
+  # These worker processes definitions are auto-generated. Do not remove or manually edit.
+  workerProcess:
+    - type: action
+      impl: app-management/app-config
+    - type: action
+      impl: app-management/association
+    - type: action
+      impl: app-management/installation
+
+runtimeManifest:
+  packages:
+    # This package definition is auto-generated. Do not remove or manually edit.
+    app-management:
+      license: Apache-2.0
+      actions:
+        app-config:
+          function: .generated/actions/app-management/app-config.js
+          web: yes
+          runtime: nodejs:24
+          annotations:
+            final: true
+            require-adobe-auth: true
+        association:
+          function: .generated/actions/app-management/association.js
+          web: yes
+          runtime: nodejs:24
+          annotations:
+            final: true
+            require-adobe-auth: true
+            include-ims-credentials: true
+        installation:
+          function: .generated/actions/app-management/installation.js
+          web: yes
+          runtime: nodejs:24
+          annotations:
+            final: true
+            require-adobe-auth: true
+            include-ims-credentials: true
+          limits:
+            timeout: 600000
+      inputs:
+        LOG_LEVEL: $LOG_LEVEL
+    delivery-slots:
+      license: Apache-2.0
+      actions:
+        # Storefront availability feed. Public: shoppers have no Adobe IMS login, and the response holds
+        # only which dates and slots are open (see actions/availability/index.js).
+        availability:
+          function: actions/availability/index.js
+          web: "yes"
+          runtime: nodejs:24
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            SLOT_PROFILES: $SLOT_PROFILES
+            AIO_COMMERCE_AUTH_IMS_CLIENT_ID: $AIO_COMMERCE_AUTH_IMS_CLIENT_ID
+            AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS: $AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL
+            AIO_COMMERCE_AUTH_IMS_ORG_ID: $AIO_COMMERCE_AUTH_IMS_ORG_ID
+            AIO_COMMERCE_AUTH_IMS_SCOPES: $AIO_COMMERCE_AUTH_IMS_SCOPES
+          annotations:
+            require-adobe-auth: false
+            include-ims-credentials: true
+            final: true
+        # Storefront hold. Public: the masked cart ID is the credential (see actions/hold/handler.js).
+        hold:
+          function: actions/hold/index.js
+          web: "yes"
+          runtime: nodejs:24
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            SLOT_PROFILES: $SLOT_PROFILES
+            AIO_COMMERCE_AUTH_IMS_CLIENT_ID: $AIO_COMMERCE_AUTH_IMS_CLIENT_ID
+            AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS: $AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL
+            AIO_COMMERCE_AUTH_IMS_ORG_ID: $AIO_COMMERCE_AUTH_IMS_ORG_ID
+            AIO_COMMERCE_AUTH_IMS_SCOPES: $AIO_COMMERCE_AUTH_IMS_SCOPES
+          annotations:
+            require-adobe-auth: false
+            include-ims-credentials: true
+            final: true
+        # Place-order webhook (webhooks in app.commerce.config.ts): validates and books the slot.
+        # raw-http keeps the signed body intact for the optional signature check.
+        validate-order:
+          function: actions/validate-order/index.js
+          web: "yes"
+          runtime: nodejs:24
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            SLOT_PROFILES: $SLOT_PROFILES
+            WEBHOOK_PUBLIC_KEY: $WEBHOOK_PUBLIC_KEY
+            AIO_COMMERCE_AUTH_IMS_CLIENT_ID: $AIO_COMMERCE_AUTH_IMS_CLIENT_ID
+            AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS: $AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL
+            AIO_COMMERCE_AUTH_IMS_ORG_ID: $AIO_COMMERCE_AUTH_IMS_ORG_ID
+            AIO_COMMERCE_AUTH_IMS_SCOPES: $AIO_COMMERCE_AUTH_IMS_SCOPES
+          annotations:
+            require-adobe-auth: true
+            include-ims-credentials: true
+            raw-http: true
+            final: true
+        # Totals-collector custom fees webhook: adds the held slot's fee to the cart.
+        slot-fee:
+          function: actions/slot-fee/index.js
+          web: "yes"
+          runtime: nodejs:24
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            AIO_COMMERCE_AUTH_IMS_CLIENT_ID: $AIO_COMMERCE_AUTH_IMS_CLIENT_ID
+            AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS: $AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL
+            AIO_COMMERCE_AUTH_IMS_ORG_ID: $AIO_COMMERCE_AUTH_IMS_ORG_ID
+            AIO_COMMERCE_AUTH_IMS_SCOPES: $AIO_COMMERCE_AUTH_IMS_SCOPES
+          annotations:
+            require-adobe-auth: true
+            include-ims-credentials: true
+            final: true
+        # Order-saved Commerce event (eventing in app.commerce.config.ts): confirms or releases the slot.
+        order-events:
+          function: actions/order-events/index.js
+          web: "no"
+          runtime: nodejs:24
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            AIO_COMMERCE_AUTH_IMS_CLIENT_ID: $AIO_COMMERCE_AUTH_IMS_CLIENT_ID
+            AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS: $AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL
+            AIO_COMMERCE_AUTH_IMS_ORG_ID: $AIO_COMMERCE_AUTH_IMS_ORG_ID
+            AIO_COMMERCE_AUTH_IMS_SCOPES: $AIO_COMMERCE_AUTH_IMS_SCOPES
+          annotations:
+            include-ims-credentials: true
+            final: true
+        # Expires stale holds every 10 minutes (the delivery-slots-sweep trigger below).
+        cleanup:
+          function: actions/cleanup/index.js
+          web: "no"
+          runtime: nodejs:24
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            AIO_COMMERCE_AUTH_IMS_CLIENT_ID: $AIO_COMMERCE_AUTH_IMS_CLIENT_ID
+            AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS: $AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL
+            AIO_COMMERCE_AUTH_IMS_ORG_ID: $AIO_COMMERCE_AUTH_IMS_ORG_ID
+            AIO_COMMERCE_AUTH_IMS_SCOPES: $AIO_COMMERCE_AUTH_IMS_SCOPES
+          annotations:
+            include-ims-credentials: true
+            final: true
+      triggers:
+        delivery-slots-sweep:
+          feed: /whisk.system/alarms/alarm
+          inputs:
+            cron: "*/10 * * * *"
+      rules:
+        delivery-slots-sweep-cleanup:
+          trigger: delivery-slots-sweep
+          action: cleanup
